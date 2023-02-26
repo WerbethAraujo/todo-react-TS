@@ -1,29 +1,41 @@
-import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 
 import styles from './TaskForm.module.css';
 
-import { Itask } from '../../interfaces/Task';
+import { ITask } from '../../interfaces/Task';
 
 interface Props {
   buttonText: string;
+  taskList: ITask[];
+  setTaskList?: React.Dispatch<React.SetStateAction<ITask[]>>;
 }
 
-export function TaskForm({ buttonText }: Props) {
+export function TaskForm({ buttonText, taskList, setTaskList }: Props) {
   const [id, setId] = useState<number>(0);
   const [title, setTitle] = useState<string>('');
   const [priority, setPriority] = useState<number>(0);
 
-  function handleAddTask() {}
+  function handleAddTask(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const id = Math.floor(Math.random() * 1000);
+
+    const newTask: ITask = { id, title, priority };
+
+    setTaskList!([...taskList, newTask]);
+
+    setTitle('');
+    setPriority(0);
+
+    console.log(taskList);
+  }
 
   function handleChandeInput(e: ChangeEvent<HTMLInputElement>) {
     if (e.target.name === 'titleTask') {
-      console.log(e.target.name);
       setTitle(e.target.value);
     } else {
       setPriority(parseInt(e.target.value));
     }
-
-    console.log(title, priority, e);
   }
   return (
     <div>
@@ -36,6 +48,7 @@ export function TaskForm({ buttonText }: Props) {
             name='titleTask'
             placeholder='Título da tarefa'
             onChange={handleChandeInput}
+            value={title}
           />
         </div>
         <div className={styles.form_box}>
@@ -45,6 +58,7 @@ export function TaskForm({ buttonText }: Props) {
             name='priority'
             placeholder='Prioridade da tarefa'
             onChange={handleChandeInput}
+            value={priority || 0}
           />
         </div>
         <input type='submit' value={buttonText} />

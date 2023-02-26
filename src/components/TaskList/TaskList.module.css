@@ -1,0 +1,39 @@
+.task_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 400px;
+  margin: 0 auto;
+  border-bottom: 1px solid #ccc;
+  padding: 1em;
+}
+
+.task_details {
+  text-align: left;
+}
+
+.task_details strong {
+  display: block;
+  font-size: 1.2em;
+  margin-bottom: 1em;
+}
+.task_actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.task_actions i {
+  background: #282c34;
+  color: #fff;
+  margin-bottom: 0.5em;
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 0.2em;
+  transition: 0.3s;
+}
+
+.task_actions i:hover {
+  color: #61dafb;
+}

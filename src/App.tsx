@@ -5,16 +5,22 @@ import { TaskList } from './components/TaskList';
 
 import styles from './App.module.css';
 
-import { Itask } from './interfaces/Task';
+import { ITask } from './interfaces/Task';
+import { useState } from 'react';
 
 function App() {
+  const [taskList, setTaskList] = useState<ITask[]>([]);
   return (
     <>
       <Header />
 
       <main className={styles.main}>
-        <TaskForm buttonText='Criar tarefa' />
-        <TaskList />
+        <TaskForm
+          buttonText='Criar tarefa'
+          taskList={taskList}
+          setTaskList={setTaskList}
+        />
+        <TaskList taskList={taskList} />
       </main>
 
       <Footer />
