@@ -1,7 +1,11 @@
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { TaskForm } from './components/TaskForm';
+import { TaskList } from './components/TaskList';
 
 import styles from './App.module.css';
+
+import { Itask } from './interfaces/Task';
 
 function App() {
   return (
@@ -9,7 +13,8 @@ function App() {
       <Header />
 
       <main className={styles.main}>
-        <h2>To do List</h2>
+        <TaskForm buttonText='Criar tarefa' />
+        <TaskList />
       </main>
 
       <Footer />
