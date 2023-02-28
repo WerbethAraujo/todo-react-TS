@@ -12,8 +12,8 @@ export function TaskList({ taskList, onDeleteTask, onEditTask }: Props) {
   return (
     <>
       {taskList.length > 0 ? (
-        taskList.map((task, idx) => (
-          <div key={idx} className={styles.task_container}>
+        taskList.map((task) => (
+          <div key={task.id} className={styles.task_container}>
             <div className={styles.task_details}>
               <strong>{task.title}</strong>
               <span>Prioridade: {task.priority}</span>

@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { TaskForm } from './components/TaskForm';
@@ -7,11 +9,10 @@ import { Modal } from './components/Modal';
 import styles from './App.module.css';
 
 import { ITask } from './interfaces/Task';
-import { useState } from 'react';
 
 function App() {
   const [taskList, setTaskList] = useState<ITask[]>([]);
-  const [taskToUpdate, settaskToUpdate] = useState<ITask | null>(null);
+  const [taskToUpdate, setTaskToUpdate] = useState<ITask | null>(null);
 
   function hadleDeleteTask(id: number) {
     setTaskList(taskList.filter((task) => task.id !== id));
@@ -21,9 +22,9 @@ function App() {
     const modal = document.querySelector('#modal');
     display ? modal!.classList.remove('hide') : modal!.classList.add('hide');
   }
-  function handelEditTask(task: ITask): void {
+  function handleEditTask(task: ITask): void {
     hideOrShowModal(true);
-    settaskToUpdate(task);
+    setTaskToUpdate(task);
   }
 
   function handleUpdateTask(id: number, title: string, priority: number) {
@@ -33,9 +34,10 @@ function App() {
       priority,
     };
 
-    const newsItemsTask = taskList.map((task, idx) => {
+    const newsItemsTask = taskList.map((task) => {
       return task.id === updatedTask.id ? updatedTask : task;
     });
+
     setTaskList(newsItemsTask);
 
     hideOrShowModal(false);
@@ -44,6 +46,7 @@ function App() {
   return (
     <>
       <Modal
+        titleModal={'Editar tarefa'}
         children={
           <TaskForm
             buttonText='Editar tarefa'
@@ -66,7 +69,7 @@ function App() {
         <TaskList
           taskList={taskList}
           onDeleteTask={hadleDeleteTask}
-          onEditTask={handelEditTask}
+          onEditTask={handleEditTask}
         />
       </main>
 

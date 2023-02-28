@@ -37,6 +37,8 @@ export function TaskForm({
     if (onUpdateTask) {
       onUpdateTask(id, title, priority);
     } else {
+      const id = Math.floor(Math.random() * 1000);
+
       const newTask: ITask = { id, title, priority };
 
       setTaskList!([...taskList, newTask]);
@@ -44,6 +46,8 @@ export function TaskForm({
       setTitle('');
       setPriority(0);
     }
+
+    localStorage.setItem('taskList', JSON.stringify(taskList));
   }
 
   function handleChandeInput(e: ChangeEvent<HTMLInputElement>) {
